@@ -1,24 +1,38 @@
 {
-  "name": "SiGame by Yakov Novashinskiy",
-  "version": "1.0.0",
-  "description": "Quiz",
+  "name": "SiGame",
+  "productName": "SiGame",
   "main": "main.js",
+  "description": "Quiz game",
+  "version": "1.0.0",
   "scripts": {
     "start": "electron .",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "build": "electron-builder --win portable",
+    "build32+": "electron-builder --ia32 --x64 -w portable"
   },
+  "author": {
+    "name": "DefriDwamn",
+    "email": "Yakovnova@gmail.com"
+  },
+  "license": "MIT",
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.67",
-    "@electron-forge/maker-deb": "^6.0.0-beta.67",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.67",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.67",
-    "@electron-forge/maker-zip": "^6.0.0-beta.67",
-    "electron": "^19.0.4"
+    "electron": "23.2.1",
+    "electron-builder": "^23.6.0"
   },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
-    "node-sass": "^7.0.3",
-    "pug": "^3.0.2"
+  "build": {
+    "asar": false,
+    "files": [
+      "!node_modules/**",
+      "!LICENSE.md",
+      "!.gitgnore",
+      "!2.jpg",
+      "!src/css/start.css.map",
+      "!src/css/app.css.map",
+      "!src/css/start.scss",
+      "!src/css/app.scss"
+    ],
+    "icon": "D:/PICs/2-23.png",
+    "win": {
+      "icon": "D:/PICs/2-23.png"
+    }
   }
 }

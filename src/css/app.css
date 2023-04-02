@@ -12,9 +12,9 @@ body {
 
 html,
 body {
-  background-color: #ffffff;
   margin: 0;
   padding: 0;
+  background: rgba(219, 253, 255, 0.1176470588);
 }
 
 * {
@@ -25,11 +25,6 @@ body {
   user-select: none;
 }
 
-@media (min-aspect-ratio: 16/9) {
-  body {
-    zoom: 1.6;
-  }
-}
 .wrapper {
   width: 85%;
   height: 80%;
@@ -44,6 +39,14 @@ body {
   overflow: hidden;
 }
 
+@media (min-aspect-ratio: 16/9) {
+  body {
+    zoom: 1.5;
+  }
+  .wrapper {
+    width: 70%;
+  }
+}
 .plate-up {
   height: 100%;
   margin-left: 6%;
@@ -224,6 +227,11 @@ body {
   display: flex;
   justify-content: space-evenly;
 }
+.plate-down .card.getQuestion {
+  transform: translate(-50%, -50%) scale(1);
+  transition: all ease-in-out;
+  transition-duration: 0.4s;
+}
 .plate-down .card {
   width: 13%;
   height: 100%;
@@ -336,14 +344,38 @@ body {
   position: fixed;
   bottom: 5px;
   right: 5px;
-  border-radius: 30px;
-  width: 50px;
-  height: 50px;
+  border-radius: 50px;
+  height: 6%;
   border: none;
-  background-color: rgba(33, 32, 36, 0.8705882353);
+  background-color: #B5C0C6;
   opacity: 0;
+  font-weight: 500;
 }
 .add-card:hover {
+  opacity: 1;
+}
+
+.toStartButton {
+  position: fixed;
+  padding: 0;
+  top: 5px;
+  left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 25px;
+  width: 30px;
+  border: none;
+  background: none;
+  opacity: 0;
+}
+.toStartButton span {
+  height: 30%;
+  width: 100%;
+  background-color: #B5C0C6;
+  border-radius: 20px;
+}
+.toStartButton:hover {
   opacity: 1;
 }
 

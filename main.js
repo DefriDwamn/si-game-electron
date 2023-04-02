@@ -3,14 +3,16 @@ const path = require('path');
 const fs = require('fs');
 
 const { QuestionFileError } = require('./customErrors');
-const questionPack_Path = path.join(__dirname, 'quests.json');
 const config = require('./config.json');
 
 let mainWindow;
 
+let questionsData = [];
+let questionPath = '';
+
 function createWindow() {
   mainWindow = new BrowserWindow({
-    title: 'SiGame by Yakov Novashinskiy',
+    title: 'SiGame',
     width: 1920,
     height: 1080,
     webPreferences: {
@@ -24,7 +26,8 @@ function createWindow() {
     minHeight: 600
   })
 
-  mainWindow.loadFile(path.join(__dirname, './renderer/app.html'));
+  mainWindow.loadFile(path.join(__dirname, './src/start.html'));
+
   mainWindow.maximize();
   mainWindow.setMenuBarVisibility(false);
   mainWindow.on('ready-to-show', () => {
@@ -43,16 +46,29 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on(('loaded'), (e, options) => {
-  questionPack_send();
+ipcMain.on('file-selected', (e, filepath) => {
+  questionPack_send(filepath);
 })
 
-function questionPack_send() {
+ipcMain.on('reloadAppPage', (e) => {
+  mainWindow.webContents.send('questionPack', questionsData)
+})
+
+ipcMain.on('toStart', (e) => {
+  questionsData = [];
+  questionPath = '';
+  mainWindow.loadFile(path.join(__dirname, './src/start.html'));
+})
+
+function questionPack_send(filepath) {
   try {
-    let questionPack = questionPack_ToObj(questionPack_Path);
-    mainWindow.webContents.send('questionPack', questionPack);
+    questionsData = questionPack_ToObj(filepath);
+    questionPath = path.parse(filepath).dir;
+    mainWindow.webContents.send('mainQuestionPath', filepath)
+
+    mainWindow.loadFile(path.join(__dirname, './src/app.html'));
   } catch (err) {
-    qError_send(err)
+    mainWindow.webContents.send('file-error', err);
   }
 }
 
@@ -66,7 +82,6 @@ function questionPack_ToObj(filepath) {
     checkQuestionPack(questionPack);
     return questionPack;
   } catch (err) {
-    console.error(err)
     throw new QuestionFileError(`Error parsing question pack: ${err.stack}`)
   }
 }
@@ -105,7 +120,6 @@ function checkQuestionPack(questionPack) {
   }
 }
 
-function qError_send(err) {
-  if (err instanceof QuestionFileError) mainWindow.webContents.send('qError', err);
-  else console.error(err);
-}
+ipcMain.on('questionIndexesToMain', (e, indexes) => {
+  mainWindow.webContents.send('oneQuestionData', questionsData[indexes[0]].questions[indexes[1]], questionPath);
+})

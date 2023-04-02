@@ -1,4 +1,5 @@
 const formAddButton = document.querySelector('#form-addButton');
+const toStartButton = document.querySelector('.toStartButton');
 
 const elemChooseButtons = document.querySelector('.chooseButtons');
 const elemTeamsCards = document.querySelector('.cards');
@@ -6,15 +7,15 @@ const elemQuestions = document.querySelector('.questions');
 const elemProgress = document.querySelector('.progress');
 const elemAnswer = document.querySelector('.answer');
 
-let memQuestPack = [];
 const MAX_TEAMS = 5;
 const pHolderCardTitleInput = "Команда";
 const pHolderCardScoreInput = "Очки";
 const ValueCardScoreInput = 0;
 
-const QUESTION_TIME_S = 5;
+const QUESTION_TIME = 5;
+const PRE_QUESTION_TIME = 1;
 
-ipcRenderer.send('loaded');
+ipcRenderer.send('reloadAppPage');
 
 function addTeamCard(e) {
     e.preventDefault();
@@ -97,7 +98,8 @@ function onClickTeamCard(e) {
     }
 }
 
-function addQuestionPack(questionPackObj) {
+function addQuestionPack(questionPackObj, filepath) {
+    questionPath = filepath;
     elemQuestions.style.display = 'flex';
     for (let [i, theme] of questionPackObj.entries()) {
         const questionsLine = createElem("div", { className: "questions-line", id: "ql_" + i });
@@ -107,7 +109,6 @@ function addQuestionPack(questionPackObj) {
         questionsLine.append(questionsTheme);
         questionsTheme.append(questionsThemeText);
 
-        memQuestPack.push(theme.questions);
         for (let [j, elem] of theme.questions.entries()) {
             let cost = elem[2];
             const questionsButton = createElem("div", { className: "questions-button", id: "qb_" + i + "_" + j });
@@ -131,18 +132,22 @@ function startQuestion(e) {
         let questionIds = button.id.substring(3).split('_'); //button.id: qb_0_0
         let themeId = questionIds[0];
         let questionId = questionIds[1];
-        let qType = memQuestPack[themeId][questionId][0].questionType;
-        let aType = memQuestPack[themeId][questionId][0].answerType;
+        let questionIndexes = [themeId, questionId]
 
-        behaviorOnPackType(qType, elemProgress.querySelector('.question-box'), memQuestPack[themeId][questionId][1]);
-        behaviorOnPackType(aType, elemAnswer.querySelector('.answer-box'), memQuestPack[themeId][questionId][3]);
-
-        let qCost = memQuestPack[themeId][questionId][2];
-        cardsGetQuestion(qCost);
+        ipcRenderer.send('questionIndexesToMain', questionIndexes);
 
         disableAndBlurButton(button);
-        //startQuestionProgressBar(QUESTION_TIME_S);
     }
+}
+
+function setOneQuestion(question, questionPath) {
+    let qType = question[0].questionType;
+    let aType = question[0].answerType;
+    behaviorOnPackType(qType, elemProgress.querySelector('.question-box'), question[1], questionPath);
+    behaviorOnPackType(aType, elemAnswer.querySelector('.answer-box'), question[3], questionPath);
+
+    let qCost = question[2];
+    cardsGetQuestion(qCost);
 }
 
 function disableAndBlurButton(button) {
@@ -172,10 +177,10 @@ function startQuestionProgressBar(questionTime) {
     const questionTimer = setTimeout(() => {
         progressBarActive.classList.remove('question-bar-active-fill');
         progressBar.style.visibility = 'hidden';
-      }, questionTime * 1000);
+    }, questionTime * 1000);
 }
 
-function behaviorOnPackType(packType, element, value) {
+function behaviorOnPackType(packType, element, value, questionPath) {
     if (packType == "text") {
         let text = createElem('h1', {
             className: element.className == 'question-box' ? 'question-text' : 'answer-text'
@@ -185,7 +190,7 @@ function behaviorOnPackType(packType, element, value) {
     }
     else if (packType == "photo") {
         let photo = createElem('img', {
-            src: 'photo/' + value
+            src: questionPath +'/'+value
         });
         photo.style.height = "80%";
         photo.style.width = "50%"
@@ -220,6 +225,9 @@ function onTeamGetQuestion(e) {
             cardUp.style.setProperty('--cardShadow', '');
             cardUp.style.setProperty('--cardShadowHover', '');
             if ((card.contains(e.target) || keyToNum == Number(cardId)) && !isSkip) {
+                card.style.setProperty('transform', 'translate(0, -25%) scale(1.3)');
+                card.style.setProperty('transition', 'all ease-in-out');
+                card.style.setProperty('transition-duration', '0.4s');
                 elemChooseButtons.setTeam = card;
                 elemChooseButtons.qCost = card.qCost;
             }
@@ -259,6 +267,7 @@ function onChooseButtons(e) {
         cardsGetQuestion(setQuestionCost);
     }
     if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == 'KeyY' || e.code == 'KeyN') {
+        elemChooseButtons.setTeam.style.setProperty('transform', 'none');
         removeMultipleEventListener(elemChooseButtons, ['click', 'keydown'], onChooseButtons)
     }
 }
@@ -266,7 +275,7 @@ function onChooseButtons(e) {
 function toShowAnswer(e) {
     e.preventDefault();
     let keyS = e.code == 'KeyS';
-    let targetCont = (elemAnswer.contains(e.target) && e.ctrlKey);
+    let targetCont = (elemAnswer.contains(e.target));
     if (keyS || targetCont) {
         elemAnswer.style.display = 'none';
         elemQuestions.style.display = 'flex';
@@ -312,10 +321,14 @@ ipcRenderer.on('questionPack', (questionPack) => {
     addQuestionPack(questionPack);
 });
 
-ipcRenderer.on('qError', (err) => {
-    console.log(err);
+ipcRenderer.on('oneQuestionData', (question, questionPath) => {
+    setOneQuestion(question, questionPath);
 });
+
+ipcRenderer.on('mainQuestionPath', () => {
+})
 
 elemQuestions.addEventListener('click', startQuestion);
 elemTeamsCards.addEventListener('click', onClickTeamCard);
+toStartButton.addEventListener('click', () => { ipcRenderer.send('toStart') });
 formAddButton.addEventListener('submit', addTeamCard);

@@ -6,12 +6,12 @@ contextBridge.exposeInMainWorld('os', {
   homedir: () => os.homedir(),
 });
 
-contextBridge.exposeInMainWorld('path', {
-  join: (...args) => path.join(...args),
+contextBridge.exposeInMainWorld('node', {
+  dirname: path.join(__dirname, 'src'),
 });
 
-contextBridge.exposeInMainWorld('node', {
-  dirname: path.join(__dirname, 'renderer'),
+contextBridge.exposeInMainWorld('path', {
+  join: (...args) => path.join(...args),
 });
 
 contextBridge.exposeInMainWorld('ipcRenderer', {

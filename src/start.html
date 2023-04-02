@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link href="css/start.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="error-message"></div>
+
+    <div class="container">
+        <h1>Своя Игра</h1>
+        <label for="file-input" id="file-label">Выбрать файл</label>
+        <input type="file" id="file-input" accept=".json">
+    </div>
+
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="shape">
+        <div class="rotator"></div>
+        <div class="authors">Авторы:<br>Яков Новашинский<br>Данил Сидякин</div>
+    </div>
+
+    <script src="js/rendererStart.js"></script>
+</body>
+
+</html>
