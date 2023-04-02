@@ -24,7 +24,7 @@
       "!node_modules/**",
       "!LICENSE.md",
       "!.gitgnore",
-      "!2.jpg",
+      "!testQuestionPack/**",
       "!src/css/start.css.map",
       "!src/css/app.css.map",
       "!src/css/start.scss",
