@@ -19,7 +19,7 @@
     "electron-builder": "^23.6.0"
   },
   "build": {
-    "asar": false,
+    "asar": true,
     "files": [
       "!node_modules/**",
       "!LICENSE.md",

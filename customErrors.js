@@ -1,4 +1,3 @@
-
 class QuestionFileError extends Error {
     constructor(message) {
         super(`Invalid question file: ${message}`);
