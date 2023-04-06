@@ -7,7 +7,7 @@ const elemQuestions = document.querySelector('.questions');
 const elemProgress = document.querySelector('.progress');
 const elemAnswer = document.querySelector('.answer');
 
-const MAX_TEAMS = 5;
+const MAX_TEAMS = 15;
 const pHolderCardTitleInput = "Команда";
 const pHolderCardScoreInput = "Очки";
 const ValueCardScoreInput = 0;
@@ -126,18 +126,23 @@ function startQuestion(e) {
     let cardsLeastOne = elemTeamsCards.children.length > 0;
     if (button != null && !button.disabled && cardsLeastOne) {
         playSound('click.mp3');
-
-        elemQuestions.style.display = 'none';
-        elemProgress.style.display = 'flex';
-
-        let questionIds = button.id.substring(3).split('_'); //button.id: qb_0_0
-        let themeId = questionIds[0];
-        let questionId = questionIds[1];
-        let questionIndexes = [themeId, questionId]
-
-        ipcRenderer.send('questionIndexesToMain', questionIndexes);
-
         disableAndBlurButton(button);
+        const buttonScaleMs = 1000
+        button.style.setProperty('transform', 'scale(1.3)');
+        button.style.setProperty('transition', 'all ease-in-out');
+        button.style.setProperty('transition-duration', `${buttonScaleMs}ms`);
+        setTimeout(() => {
+            button.style.setProperty('transform', 'scale(1)');
+            elemQuestions.style.display = 'none';
+            elemProgress.style.display = 'flex';
+
+            let questionIds = button.id.substring(3).split('_'); //button.id: qb_0_0
+            let themeId = questionIds[0];
+            let questionId = questionIds[1];
+            let questionIndexes = [themeId, questionId]
+
+            ipcRenderer.send('questionIndexesToMain', questionIndexes);
+        }, buttonScaleMs);
     }
 }
 
@@ -191,7 +196,7 @@ function behaviorOnPackType(packType, element, value, questionPath) {
     }
     else if (packType == "photo") {
         let photo = createElem('img', {
-            src: questionPath +'/'+value
+            src: questionPath + '/' + value
         });
         photo.style.height = "80%";
         photo.style.width = "50%"
@@ -325,9 +330,6 @@ ipcRenderer.on('questionPack', (questionPack) => {
 ipcRenderer.on('oneQuestionData', (question, questionPath) => {
     setOneQuestion(question, questionPath);
 });
-
-ipcRenderer.on('mainQuestionPath', () => {
-})
 
 elemQuestions.addEventListener('click', startQuestion);
 elemTeamsCards.addEventListener('click', onClickTeamCard);
