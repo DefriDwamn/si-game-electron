@@ -78,7 +78,8 @@ function onChangeTeamCardName(e) {
     if (cardInputText == undefined || cardInputText == null || cardInputText == '') {
         cardInputText = pHolderCardTitleInput;
     }
-    e.path[2].querySelector('.photo-text').innerText = cardInputText[0];
+    console.log(e.srcElement)
+    e.srcElement.previousSibling.querySelector('.photo-text').innerText = cardInputText[0];
 }
 
 function onChangeTeamCardScore(e) {
