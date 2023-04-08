@@ -6,8 +6,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win portable",
-    "build32+": "electron-builder --ia32 --x64 -w portable"
+    "build": "electron-builder --win portable"
   },
   "author": {
     "name": "DefriDwamn",
@@ -15,7 +14,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "electron": "23.2.1",
+    "electron": "^22.3.5",
     "electron-builder": "^23.6.0"
   },
   "build": {
@@ -32,6 +31,7 @@
     ],
     "icon": "D:/PICs/2-23.png",
     "win": {
+      "target": "nsis",
       "icon": "D:/PICs/2-23.png"
     }
   }

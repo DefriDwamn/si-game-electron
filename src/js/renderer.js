@@ -7,11 +7,11 @@ const elemQuestions = document.querySelector('.questions');
 const elemProgress = document.querySelector('.progress');
 const elemAnswer = document.querySelector('.answer');
 
-const MAX_TEAMS = 15;
 const pHolderCardTitleInput = "Команда";
 const pHolderCardScoreInput = "Очки";
 const ValueCardScoreInput = 0;
 
+const MAX_TEAMS = 5;
 const QUESTION_TIME = 5;
 const PRE_QUESTION_TIME = 1;
 

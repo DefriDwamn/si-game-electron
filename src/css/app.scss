@@ -24,6 +24,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: url("./svg/cursor.svg"), auto;
 }
 
 .wrapper {
@@ -382,8 +383,7 @@ body {
     border: none;
     background-color: #B5C0C6;
     opacity: 0;
-    font-weight: 500;
-
+    font-weight: 600;
     &:hover {
         opacity: 1;
     }
