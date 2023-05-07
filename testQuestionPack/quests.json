@@ -1,176 +1,176 @@
 [
 {
-  "themeName": "Тема 1",
+    "themeName": "Термины",
+    "questions": [
+        [
+            {"questionType": "text", "answerType": "text"},
+            "Доля в собственности компании, которая дает ее владельцу право на получение дивидендов",
+            100,
+            "Акции"
+        ],
+        [
+            {"questionType": "text", "answerType": "text"},
+            "Вероятность денежных потерь, в результате наступления различных неблагоприятных ситуаций",
+            200,
+            "Финансовые риски"
+        ],
+        [
+            {"questionType": "text", "answerType": "text"},
+            "Вложение средств с целью получения прибыли в будущем",
+            300,
+            "Инвестиции"
+        ],
+        [
+            {"questionType": "text", "answerType": "text"},
+            "Процесс повышения общего уровня цен в экономике",
+            400,
+            "Экономический подъём"
+        ],
+        [
+            {"questionType": "text", "answerType": "text"},
+            "Дайте определение понятию 'Страхование'",
+            500,
+            "Верно"
+        ]
+    ]
+},
+{
+  "themeName": "Аннограммы",
+  "questions": [
+    [
+      {"questionType": "text", "answerType": "text"},
+      "КИАИЦ",
+      100,
+      "Акции"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "БЫКУТО",
+      200,
+      "Убыток"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "ФОТЕЛД",
+      300,
+      "Дефолт"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "НАБТВОРКСТО",
+      400,
+      "Банкротство"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "ОХАНТИВРАСЕ",
+      500,
+      "Страхование"
+    ]
+  ]
+},
+{
+  "themeName": "Правда или Ложь",
+  "questions": [
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Инвестирование всегда гарантирует прибыль",
+      200,
+      "Ложь"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Рынок недвижимости никогда не падает в цене",
+      200,
+      "Ложь"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Когда вы покупаете акции, вы становитесь совладельцем компании",
+      200,
+      "Правда"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Инфляция может привести к сокращению доходности вкладов в банке",
+      200,
+      "Правда"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Инвесторы могут использовать страхование как способ снижения финансового риска",
+      200,
+      "Правда"
+    ]
+  ]
+},
+{
+  "themeName": "Деньги",
+  "questions": [
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Какой из этих вариантов является примером непредвиденных расходов? \n a) Покупка автомобиля \n b) Покупка дома \n c) Ремонт автомобиля или дома",
+      100,
+      "c) Ремонт автомобиля или дома"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Как вы думаете, что произойдет, если вы потратите все свои деньги на игрушки и сладости? \n a) Вы будете очень счастливы \n b) Вы не сможете купить что-то дорогое \n c) Вы можете остаться без денег, если случится что-то непредвиденное",
+      200,
+      "c) Вы можете остаться без денег, если случится что-то непредвиденное"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Как вы думаете, почему важно знать, как распределять свои деньги? \n a) Потому что это поможет вам купить много вещей \n b) Потому что вы сможете лучше управлять своими деньгами \n c) Потому что деньги нужно тратить сразу, пока они есть",
+      300,
+      "b) Потому что вы сможете лучше управлять своими деньгами"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Какой процент денег вы должны откладывать на сбережения каждый месяц? \n a) 10% \n b) 50% \n c) 100%",
+      400,
+      "a) 10%"
+    ],
+    [
+      {"questionType": "text", "answerType": "text"},
+      "Какой из этих вариантов является примером финансового риска? \n a) Выиграть деньги в лотерее \n b) Вложить деньги в акции \n c) Оплатить покупки кредитной картой",
+      500,
+      "b) Вложить деньги в акции"
+    ]
+  ]
+},
+{
+  "themeName": "Ребусы",
   "questions": [
     [
       {"questionType": "photo", "answerType": "text"},
-      "2.jpg", 
+      "1риск.png",
       100,
-      "Ответ"
+      "Риск"
     ],
     [
-      {"questionType": "text", "answerType": "photo"},
-      "Вопрос 2",
+      {"questionType": "photo", "answerType": "text"},
+      "2капитал.png",
       200,
-      "2.jpg"
+      "Капитал"
     ],
     [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 3",
+      {"questionType": "photo", "answerType": "text"},
+      "3банкротство.png",
       300,
-      "Ответ"
+      "Банкротство"
     ],
     [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 4",
+      {"questionType": "photo", "answerType": "text"},
+      "4инфляция.png",
       400,
-      "Ответ"
+      "Инфляция"
     ],
     [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 5",
+      {"questionType": "photo", "answerType": "text"},
+      "5портфель.png",
       500,
-      "Ответ"
-    ]
-  ]
-},
-{
-  "themeName": "Тема 2",
-  "questions": [
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 1",
-      100,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 2",
-      200,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 3",
-      300,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 4",
-      400,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 5",
-      500,
-      "Ответ"
-    ]
-  ]
-},
-{
-  "themeName": "Тема 3",
-  "questions": [
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 1",
-      100,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 2",
-      200,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 3",
-      300,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 4",
-      400,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 5",
-      500,
-      "Ответ"
-    ]
-  ]
-},
-{
-  "themeName": "Тема 4",
-  "questions": [
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 1",
-      100,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 2",
-      200,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 3",
-      300,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 4",
-      400,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 5",
-      500,
-      "Ответ"
-    ]
-  ]
-},
-{
-  "themeName": "Тема 5",
-  "questions": [
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 1",
-      100,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 2",
-      200,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 3",
-      300,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 4",
-      400,
-      "Ответ"
-    ],
-    [
-      {"questionType": "text", "answerType": "text"},
-      "Вопрос 5",
-      500,
-      "Ответ"
+      "Портфель"
     ]
   ]
 }

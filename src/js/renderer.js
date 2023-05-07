@@ -7,15 +7,34 @@ const elemQuestions = document.querySelector('.questions');
 const elemProgress = document.querySelector('.progress');
 const elemAnswer = document.querySelector('.answer');
 
-const pHolderCardTitleInput = "Команда";
-const pHolderCardScoreInput = "Очки";
-const ValueCardScoreInput = 0;
+const CardTitleInput = "Команда";
+const CardScoreTitleInput = "Очки";
+const CardScoreInput = 0;
+
+const KeySkip = 'KeyS';
+const KeyYes = 'KeyY';
+const KeyNo = 'KeyN';
 
 const MAX_TEAMS = 5;
-const QUESTION_TIME = 5;
-const PRE_QUESTION_TIME = 1;
+//const QUESTION_TIME = 5;
 
-ipcRenderer.send('reloadAppPage');
+ipcRenderer.send('reload-app-page');
+
+updateZoom();
+
+function updateZoom() {
+    const startWidth = 1024;
+    const startHeigth = 768;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const kH = (height / (startHeigth))
+    const kW = (width / (startWidth))
+    const clcZoom = String(kH > kW ? kW : kH).substring(0, 3);
+
+    if (width != startWidth & height != startHeigth) {
+        document.body.style.zoom = clcZoom;
+    } else document.body.style.zoom = 1;
+}
 
 function addTeamCard(e) {
     e.preventDefault();
@@ -24,8 +43,7 @@ function addTeamCard(e) {
 
     const cardElems = elemTeamsCards.children;
     let cardsСount = cardElems.length;
-    if (cardsСount == MAX_TEAMS) console.log("Ограничение на команды превышено: " + MAX_TEAMS);
-    else {
+    if (cardsСount < MAX_TEAMS) {
         for (let id of [...Array(MAX_TEAMS + 1).keys()].slice(1)) {
             let card = document.getElementById(`card_${id}`);
             if (card == null) {
@@ -54,20 +72,20 @@ function createTeamCard(cardId) {
         {
             className: "titleClass",
             type: "text",
-            placeholder: pHolderCardTitleInput
+            placeholder: CardTitleInput
         });
     cardTitleInput.addEventListener('input', onChangeTeamCardName);
     cardUp.append(cardPhoto, cardTitleInput);
 
-    const cardPhotoText = createElem("h1", { className: "photo-text", innerText: pHolderCardTitleInput.charAt(0) });
+    const cardPhotoText = createElem("h1", { className: "photo-text", innerText: CardTitleInput.charAt(0) });
     cardPhoto.append(cardPhotoText);
 
     const cardScoreInput = createElem("input",
         {
             className: "scoreClass",
             type: "number",
-            placeholder: pHolderCardScoreInput,
-            value: ValueCardScoreInput
+            placeholder: CardScoreTitleInput,
+            value: CardScoreInput
         });
     cardScoreInput.addEventListener('input', onChangeTeamCardScore);
     cardDown.append(cardScoreInput);
@@ -76,9 +94,8 @@ function createTeamCard(cardId) {
 function onChangeTeamCardName(e) {
     let cardInputText = e.target.value;
     if (cardInputText == undefined || cardInputText == null || cardInputText == '') {
-        cardInputText = pHolderCardTitleInput;
+        cardInputText = CardTitleInput;
     }
-    console.log(e.srcElement)
     e.srcElement.previousSibling.querySelector('.photo-text').innerText = cardInputText[0];
 }
 
@@ -122,15 +139,29 @@ function addQuestionPack(questionPackObj, filepath) {
 
 function startQuestion(e) {
     e.preventDefault();
+
     let button = e.target.closest('.questions-button');
     let cardsLeastOne = elemTeamsCards.children.length > 0;
+
     if (button != null && !button.disabled && cardsLeastOne) {
         playSound('click.mp3');
         disableAndBlurButton(button);
-        const buttonScaleMs = 1000
+
+        const buttonScaleMs = 1000;
         button.style.setProperty('transform', 'scale(1.3)');
         button.style.setProperty('transition', 'all ease-in-out');
         button.style.setProperty('transition-duration', `${buttonScaleMs}ms`);
+
+        const buttons = elemQuestions.querySelectorAll('.questions-button');
+        let timeoutDisabledButtons = []
+
+        buttons.forEach(element => {
+            if (!element.disabled) {
+                element.disabled = true;
+                timeoutDisabledButtons.push(element);
+            }
+        });
+
         setTimeout(() => {
             button.style.setProperty('transform', 'scale(1)');
             elemQuestions.style.display = 'none';
@@ -142,6 +173,8 @@ function startQuestion(e) {
             let questionIndexes = [themeId, questionId]
 
             ipcRenderer.send('questionIndexesToMain', questionIndexes);
+
+            timeoutDisabledButtons.map(elem => { elem.disabled = false; });
         }, buttonScaleMs);
     }
 }
@@ -171,19 +204,22 @@ function disableAndBlurButton(button) {
     }
 }
 
-function startQuestionProgressBar(questionTime) {
+function startQuestionProgressBar() {
     const progressBar = elemProgress.querySelector('.question-bar');
     const progressBarActive = progressBar.firstElementChild
+
     progressBar.style.visibility = 'visible';
     progressBarActive.style.width = '100%'
 
-    progressBarActive.style.setProperty('--barSec', `${questionTime}s`)
+    progressBarActive.style.setProperty('--barSec', `${QUESTION_TIME}s`)
     progressBarActive.classList.add('question-bar-active-fill');
 
     const questionTimer = setTimeout(() => {
         progressBarActive.classList.remove('question-bar-active-fill');
+        progressBarActive.style.setProperty('--barSec', ``)
         progressBar.style.visibility = 'hidden';
-    }, questionTime * 1000);
+    }, QUESTION_TIME * 1000);
+    return questionTimer;
 }
 
 function behaviorOnPackType(packType, element, value, questionPath) {
@@ -198,8 +234,8 @@ function behaviorOnPackType(packType, element, value, questionPath) {
         let photo = createElem('img', {
             src: questionPath + '/' + value
         });
-        photo.style.height = "80%";
-        photo.style.width = "50%"
+        photo.style.height = "100%";
+        photo.style.width = "100%"
         element.append(photo);
     }
 }
@@ -221,7 +257,7 @@ function onTeamGetQuestion(e) {
     let keyToNum = e.code != undefined ? Number(e.code.substring(5)) : 0;
     let nowCardNums = [...Array(elemTeamsCards.childElementCount + 1).keys()].slice(1);
     let keyNumDown = nowCardNums.includes(keyToNum);
-    let isSkip = e.code == 'KeyS';
+    let isSkip = e.code == KeySkip;
 
     if (clickOnCard || keyNumDown || isSkip) {
         window.removeEventListener('keydown', onTeamGetQuestion);
@@ -231,7 +267,7 @@ function onTeamGetQuestion(e) {
             cardUp.style.setProperty('--cardShadow', '');
             cardUp.style.setProperty('--cardShadowHover', '');
             if ((card.contains(e.target) || keyToNum == Number(cardId)) && !isSkip) {
-                card.style.setProperty('transform', 'translate(0, -25%) scale(1.3)');
+                card.style.setProperty('transform', 'translate(0, -8%) scale(1.2)');
                 card.style.setProperty('transition', 'all ease-in-out');
                 card.style.setProperty('transition-duration', '0.4s');
                 elemChooseButtons.setTeam = card;
@@ -247,17 +283,21 @@ function onTeamGetQuestion(e) {
             return;
         }
         addMultipleEventListener(elemChooseButtons, ['click', 'keydown'], onChooseButtons)
+
+        //const questionTimer = startQuestionProgressBar();
+
         elemChooseButtons.style.visibility = 'visible';
     }
 }
 
 function onChooseButtons(e) {
     e.preventDefault();
+
     let teamScoreInput = elemChooseButtons.setTeam.querySelector('.scoreClass');
     let setQuestionCost = elemChooseButtons.qCost;
 
     let vScore = teamScoreInput.valueAsNumber;
-    if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || e.code == 'KeyY') {
+    if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || e.code == KeyYes) {
         elemChooseButtons.style.visibility = 'hidden';
         elemProgress.style.display = 'none';
         elemAnswer.style.display = 'flex';
@@ -266,21 +306,21 @@ function onChooseButtons(e) {
 
         addMultipleEventListener(elemAnswer, ['click', 'keydown'], toShowAnswer)
     }
-    else if (elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == 'KeyN') {
+    else if (elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == KeyNo) {
         elemChooseButtons.style.visibility = 'hidden';
 
         teamScoreInput.valueAsNumber = vScore - setQuestionCost;
         cardsGetQuestion(setQuestionCost);
     }
-    if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == 'KeyY' || e.code == 'KeyN') {
+    if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == KeyYes || e.code == KeyNo) {
+
         elemChooseButtons.setTeam.style.setProperty('transform', 'none');
         removeMultipleEventListener(elemChooseButtons, ['click', 'keydown'], onChooseButtons)
     }
 }
 
 function toShowAnswer(e) {
-    e.preventDefault();
-    let keyS = e.code == 'KeyS';
+    let keyS = e.code == KeySkip;
     let targetCont = (elemAnswer.contains(e.target));
     if (keyS || targetCont) {
         elemAnswer.style.display = 'none';
@@ -333,5 +373,6 @@ ipcRenderer.on('oneQuestionData', (question, questionPath) => {
 
 elemQuestions.addEventListener('click', startQuestion);
 elemTeamsCards.addEventListener('click', onClickTeamCard);
-toStartButton.addEventListener('click', () => { ipcRenderer.send('toStart') });
+toStartButton.addEventListener('click', () => { ipcRenderer.send('to-start') });
 formAddButton.addEventListener('submit', addTeamCard);
+window.addEventListener('resize', updateZoom);

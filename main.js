@@ -1,12 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
-
 const { QuestionFileError } = require('./customErrors');
 const config = require('./config.json');
 
 let mainWindow;
-
 let questionsData = [];
 let questionPath = '';
 
@@ -30,6 +28,7 @@ function createWindow() {
 
   mainWindow.maximize();
   mainWindow.setMenuBarVisibility(false);
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
   });
@@ -37,6 +36,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
+
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
@@ -47,22 +47,22 @@ app.on('window-all-closed', function () {
 })
 
 ipcMain.on('file-selected', (e, filepath) => {
-  questionPack_send(filepath);
+  sendQuestionPack(filepath);
 })
 
-ipcMain.on('reloadAppPage', (e) => {
+ipcMain.on('reload-app-page', (e) => {
   mainWindow.webContents.send('questionPack', questionsData)
 })
 
-ipcMain.on('toStart', (e) => {
+ipcMain.on('to-start', (e) => {
   questionsData = [];
   questionPath = '';
   mainWindow.loadFile(path.join(__dirname, './src/start.html'));
 })
 
-function questionPack_send(filepath) {
+function sendQuestionPack(filepath) {
   try {
-    questionsData = questionPack_ToObj(filepath);
+    questionsData = readQuestionPack(filepath);
     questionPath = path.parse(filepath).dir;
     mainWindow.webContents.send('mainQuestionPath', filepath)
 
@@ -72,21 +72,23 @@ function questionPack_send(filepath) {
   }
 }
 
-function questionPack_ToObj(filepath) {
+function readQuestionPack(filepath) {
   if (!fs.existsSync(filepath)) {
     throw new QuestionFileError("Question pack file not found.");
   }
 
   try {
     const questionPack = JSON.parse(fs.readFileSync(filepath, 'utf8'));
-    checkQuestionPack(questionPack);
+
+    validateQuestionPack(questionPack);
+
     return questionPack;
   } catch (err) {
     throw new QuestionFileError(`Error parsing question pack: ${err.stack}`)
   }
 }
 
-function checkQuestionPack(questionPack) {
+function validateQuestionPack(questionPack) {
   if (questionPack.length > config.MAX_THEME_COUNT) {
     throw new QuestionFileError(`Number of themes exceeds maximum of ${config.MAX_THEME_COUNT}.`);
   }

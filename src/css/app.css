@@ -8,51 +8,45 @@ body {
   font-family: "Arial";
   width: 100%;
   display: table-cell;
+  cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: rgba(219, 253, 255, 0.1176470588);
+  background: #F1E0C5;
 }
 
 * {
-  -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: url("./svg/cursor.svg"), auto;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
 .wrapper {
-  width: 85%;
-  height: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5%;
+  width: 870px;
+  height: 615px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  background: #B5C0C6;
+  background: #C9B79C;
   box-shadow: 70px 54p0pxx 134px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
   overflow: hidden;
 }
 
-@media (min-aspect-ratio: 16/9) {
-  body {
-    zoom: 1.5;
-  }
-  .wrapper {
-    width: 70%;
-  }
-}
 .plate-up {
-  height: 100%;
+  min-height: 65%;
+  max-height: 65%;
   margin-left: 6%;
   margin-right: 6%;
-  background: #D9D9D9;
+  background: rgba(113, 129, 109, 0.8);
   border-radius: 0px 0px 60px 60px;
 }
 .plate-up .questions {
@@ -75,7 +69,7 @@ body {
 .plate-up .questions .questions-line .questions-theme {
   height: 100%;
   width: 25%;
-  background: #2C2D30;
+  background: rgba(55, 63, 81, 0.4431372549);
   border-radius: 20px;
 }
 .plate-up .questions .questions-line .questions-theme .questions-theme-text {
@@ -87,13 +81,16 @@ body {
           margin-block-start: 0;
   -webkit-margin-after: 0;
           margin-block-end: 0;
-  color: #FFFFFF;
-  font-size: 175%;
+  color: rgba(255, 255, 255, 0.8823529412);
+  font-size: 110%;
+  word-break: break-word;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .plate-up .questions .questions-line .questions-button {
   height: 100%;
   width: 10%;
-  background: #2C2D30;
+  background: rgba(55, 63, 81, 0.4431372549);
   border-radius: 20px;
 }
 .plate-up .questions .questions-line .questions-button .questions-button-text {
@@ -105,7 +102,7 @@ body {
           margin-block-start: 0;
   -webkit-margin-after: 0;
           margin-block-end: 0;
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 0.8823529412);
   font-size: 165%;
 }
 .plate-up .progress {
@@ -131,8 +128,9 @@ body {
   width: auto;
   margin: 0 10px;
   text-align: center;
-  word-break: break-all;
+  word-break: break-word;
   color: #FFFFFF;
+  font-size: 150%;
 }
 .plate-up .progress .question-bar {
   visibility: hidden;
@@ -202,7 +200,7 @@ body {
 .plate-up .answer .answer-box {
   width: 80%;
   height: 70%;
-  background: #7F878B;
+  background: #212024;
   border-radius: 60px;
   display: flex;
   flex-direction: column;
@@ -213,7 +211,8 @@ body {
 .plate-up .answer .answer-box .answer-text {
   margin: 0 10px;
   text-align: center;
-  word-break: break-all;
+  color: #FFFFFF;
+  word-break: break-word;
   font-size: 35px;
   font-weight: 500;
 }
@@ -262,7 +261,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #7e868a;
+  background: rgba(55, 63, 81, 0.4431372549);
   border-radius: 15px;
   box-shadow: 6px -6px 10px var(--cardShadow), -6px -6px 10px var(--cardShadow), 6px 6px 10px var(--cardShadow), -6px 6px 10px var(--cardShadow);
 }
@@ -277,13 +276,13 @@ body {
   margin-top: 10%;
   width: 50%;
   height: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(55, 63, 81, 0.4431372549);
   border-radius: 15px;
 }
 .plate-down .card .card-up .photo .photo-text {
   width: 100%;
   height: 100%;
-  color: #212024;
+  color: rgba(255, 255, 255, 0.8823529412);
 }
 .plate-down .card .card-up input {
   display: flex;
@@ -293,7 +292,7 @@ body {
   border: none;
   background-color: transparent;
   text-align: center;
-  color: #212024;
+  color: rgba(255, 255, 255, 0.8823529412);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -303,7 +302,7 @@ body {
 .plate-down .card .card-up input:focus {
   border: none;
   outline: 0;
-  color: #212024;
+  color: rgba(255, 255, 255, 0.8823529412);
 }
 .plate-down .card .card-down {
   display: flex;
@@ -311,7 +310,7 @@ body {
   align-items: center;
   width: 100%;
   height: 15%;
-  background: #7e868a;
+  background: rgba(55, 63, 81, 0.4431372549);
   border-radius: 15px;
   margin: 5% 0;
 }
@@ -323,7 +322,7 @@ body {
   border: none;
   background-color: transparent;
   text-align: center;
-  color: #2C2D30;
+  color: rgba(255, 255, 255, 0.8823529412);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -333,7 +332,7 @@ body {
 .plate-down .card .card-down input:focus {
   border: none;
   outline: 0;
-  color: #212024;
+  color: rgba(255, 255, 255, 0.8823529412);
 }
 .plate-down .card .card-down input::-webkit-outer-spin-button, .plate-down .card .card-down input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -346,9 +345,9 @@ body {
   bottom: 5px;
   right: 5px;
   border-radius: 50px;
-  height: 6%;
+  height: 46px;
   border: none;
-  background-color: #B5C0C6;
+  background-color: rgba(55, 63, 81, 0.4431372549);
   opacity: 0;
   font-weight: 600;
 }
@@ -373,7 +372,7 @@ body {
 .toStartButton span {
   height: 30%;
   width: 100%;
-  background-color: #B5C0C6;
+  background-color: rgba(55, 63, 81, 0.4431372549);
   border-radius: 20px;
 }
 .toStartButton:hover {
@@ -392,15 +391,15 @@ body {
   border-radius: 100px;
   border-width: 0;
   margin: 0 10px;
-  width: 10%;
-  height: 100%;
+  width: 100px;
+  height: 30px;
   background: #6BB06A;
 }
 .chooseButtons .choose-no {
   border-radius: 100px;
   border-width: 0;
   margin: 0 10px;
-  width: 10%;
-  height: 100%;
+  width: 100px;
+  height: 30px;
   background: #AA4848;
 }/*# sourceMappingURL=app.css.map */

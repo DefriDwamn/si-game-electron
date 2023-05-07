@@ -1,3 +1,12 @@
+$back-color: #F1E0C5;
+$wrapper-color: #C9B79C;
+$inwrap-color: #71816dcc;
+$button-color: #373f5171;
+$card-color: #373f5171;
+$text-color: #ffffffe1;
+
+$box-color: #212024;
+
 html {
     width: 100%;
     height: 100%;
@@ -8,56 +17,47 @@ body {
     font-family: 'Arial';
     width: 100%;
     display: table-cell;
+    cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
-    background:#dbfdff1e;
+    background: $back-color;
 }
 
 * {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
-    cursor: url("./svg/cursor.svg"), auto;
+    cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
 .wrapper {
-    width: 85%;
-    height: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
+    width: 870px;
+    height: 615px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     flex-direction: column;
 
-    background: #B5C0C6;
+    background: $wrapper-color;
     box-shadow: 70px 54p0pxx 134px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     overflow: hidden;
-}
 
-@media (min-aspect-ratio: 16 / 9) {
-    body {
-        zoom: 1.5;
-    }
-
-    .wrapper {
-        width: 70%;
-    }
 }
 
 .plate-up {
-    height: 100%;
+    min-height: 65%;
+    max-height: 65%;
     margin-left: 6%;
     margin-right: 6%;
 
-    background: #D9D9D9;
+    background: $inwrap-color;
     border-radius: 0px 0px 60px 60px;
 
     .questions {
@@ -80,7 +80,7 @@ body {
             .questions-theme {
                 height: 100%;
                 width: 25%;
-                background: #2C2D30;
+                background: $button-color;
                 border-radius: 20px;
 
                 .questions-theme-text {
@@ -90,15 +90,18 @@ body {
                     justify-content: center;
                     margin-block-start: 0;
                     margin-block-end: 0;
-                    color: #FFFFFF;
-                    font-size: 175%;
+                    color: $text-color;
+                    font-size: 110%;
+                    word-break: break-word;
+                    padding-right: 10px;
+                    padding-left: 10px;
                 }
             }
 
             .questions-button {
                 height: 100%;
                 width: 10%;
-                background: #2C2D30;
+                background: $button-color;
                 border-radius: 20px;
 
                 .questions-button-text {
@@ -108,7 +111,7 @@ body {
                     justify-content: center;
                     margin-block-start: 0;
                     margin-block-end: 0;
-                    color: #FFFFFF;
+                    color: $text-color;
                     font-size: 165%;
                 }
             }
@@ -127,7 +130,7 @@ body {
         .question-box {
             width: 80%;
             height: 80%;
-            background: #212024;
+            background: $box-color;
             border-radius: 60px;
             display: flex;
             justify-content: center;
@@ -138,8 +141,9 @@ body {
                 width: auto;
                 margin: 0 10px;
                 text-align: center;
-                word-break: break-all;
+                word-break: break-word;
                 color: #FFFFFF;
+                font-size: 150%;
             }
         }
 
@@ -210,7 +214,7 @@ body {
         .answer-box {
             width: 80%;
             height: 70%;
-            background: #7F878B;
+            background: $box-color;
             border-radius: 60px;
 
             display: flex;
@@ -222,7 +226,8 @@ body {
             .answer-text {
                 margin: 0 10px;
                 text-align: center;
-                word-break: break-all;
+                color: #FFFFFF;
+                word-break: break-word;
                 font-size: 35px;
                 font-weight: 500;
             }
@@ -278,7 +283,7 @@ body {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #7e868a;
+            background: $card-color;
             border-radius: 15px;
             box-shadow: 6px -6px 10px var(--cardShadow), -6px -6px 10px var(--cardShadow), 6px 6px 10px var(--cardShadow), -6px 6px 10px var(--cardShadow);
 
@@ -294,13 +299,13 @@ body {
                 margin-top: 10%;
                 width: 50%;
                 height: 50%;
-                background: rgba(255, 255, 255, 0.2);
+                background: $button-color;
                 border-radius: 15px;
 
                 .photo-text {
                     width: 100%;
                     height: 100%;
-                    color: #212024;
+                    color: $text-color;
                 }
             }
 
@@ -312,7 +317,7 @@ body {
                 border: none;
                 background-color: transparent;
                 text-align: center;
-                color: #212024;
+                color: $text-color;
 
                 white-space: nowrap;
                 overflow: hidden;
@@ -324,7 +329,7 @@ body {
                 &:focus {
                     border: none;
                     outline: 0;
-                    color: #212024;
+                    color: $text-color;
                 }
             }
         }
@@ -335,7 +340,7 @@ body {
             align-items: center;
             width: 100%;
             height: 15%;
-            background: #7e868a;
+            background: $card-color;
             border-radius: 15px;
             margin: 5% 0;
 
@@ -347,7 +352,7 @@ body {
                 border: none;
                 background-color: transparent;
                 text-align: center;
-                color: #2C2D30;
+                color: $text-color;
 
                 white-space: nowrap;
                 overflow: hidden;
@@ -359,7 +364,7 @@ body {
                 &:focus {
                     border: none;
                     outline: 0;
-                    color: #212024;
+                    color: $text-color;
                 }
 
                 &::-webkit-outer-spin-button,
@@ -379,11 +384,12 @@ body {
     bottom: 5px;
     right: 5px;
     border-radius: 50px;
-    height: 6%;
+    height: 46px;
     border: none;
-    background-color: #B5C0C6;
+    background-color: $card-color;
     opacity: 0;
     font-weight: 600;
+
     &:hover {
         opacity: 1;
     }
@@ -401,13 +407,16 @@ body {
     width: 30px;
     border: none;
     background: none;
+
     span {
         height: 30%;
         width: 100%;
-        background-color: #B5C0C6;
+        background-color: $card-color;
         border-radius: 20px;
     }
+
     opacity: 0;
+
     &:hover {
         opacity: 1;
     }
@@ -425,8 +434,8 @@ body {
         border-radius: 100px;
         border-width: 0;
         margin: 0 10px;
-        width: 10%;
-        height: 100%;
+        width: 100px;
+        height: 30px;
         background: #6BB06A;
     }
 
@@ -434,8 +443,8 @@ body {
         border-radius: 100px;
         border-width: 0;
         margin: 0 10px;
-        width: 10%;
-        height: 100%;
+        width: 100px;
+        height: 30px;
         background: #AA4848;
     }
 }

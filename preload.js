@@ -1,7 +1,7 @@
 const os = require('os');
 const path = require('path');
-const config = require('./config.json');
 const { contextBridge, ipcRenderer } = require('electron');
+const { remote } = require('electron');
 
 contextBridge.exposeInMainWorld('os', {
   homedir: () => os.homedir(),
