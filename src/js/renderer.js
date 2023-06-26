@@ -1,5 +1,6 @@
-const formAddButton = document.querySelector('#form-addButton');
+const addCardButton = document.querySelector('.addCardButton');
 const toStartButton = document.querySelector('.toStartButton');
+const themeSwapButton = document.querySelector('.themeSwapButton');
 
 const elemChooseButtons = document.querySelector('.chooseButtons');
 const elemTeamsCards = document.querySelector('.cards');
@@ -16,7 +17,9 @@ const KeyYes = 'KeyY';
 const KeyNo = 'KeyN';
 
 const MAX_TEAMS = 5;
-//const QUESTION_TIME = 5;
+const QUESTION_TIME = 5;
+
+let questionTimer;
 
 ipcRenderer.send('reload-app-page');
 
@@ -214,12 +217,22 @@ function startQuestionProgressBar() {
     progressBarActive.style.setProperty('--barSec', `${QUESTION_TIME}s`)
     progressBarActive.classList.add('question-bar-active-fill');
 
-    const questionTimer = setTimeout(() => {
+    questionTimer = setTimeout(() => {
         progressBarActive.classList.remove('question-bar-active-fill');
-        progressBarActive.style.setProperty('--barSec', ``)
+        progressBarActive.style.setProperty('--barSec', ``);
         progressBar.style.visibility = 'hidden';
     }, QUESTION_TIME * 1000);
-    return questionTimer;
+}
+
+function stopQusetionProgressBar() {
+    if (questionTimer !== undefined) {
+        clearTimeout(questionTimer);
+        const progressBar = elemProgress.querySelector('.question-bar');
+        const progressBarActive = progressBar.firstElementChild
+        progressBarActive.classList.remove('question-bar-active-fill');
+        progressBarActive.style.setProperty('--barSec', ``);
+        progressBar.style.visibility = 'hidden';
+    }
 }
 
 function behaviorOnPackType(packType, element, value, questionPath) {
@@ -284,8 +297,7 @@ function onTeamGetQuestion(e) {
         }
         addMultipleEventListener(elemChooseButtons, ['click', 'keydown'], onChooseButtons)
 
-        //const questionTimer = startQuestionProgressBar();
-
+        startQuestionProgressBar();
         elemChooseButtons.style.visibility = 'visible';
     }
 }
@@ -313,6 +325,7 @@ function onChooseButtons(e) {
         cardsGetQuestion(setQuestionCost);
     }
     if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == KeyYes || e.code == KeyNo) {
+        stopQusetionProgressBar();
 
         elemChooseButtons.setTeam.style.setProperty('transform', 'none');
         removeMultipleEventListener(elemChooseButtons, ['click', 'keydown'], onChooseButtons)
@@ -345,6 +358,10 @@ function playSound(file) {
     sound.play();
 }
 
+function swapColorTheme() {
+    
+}
+
 function createElem(tag, elemAttributes) {
     return Object.assign(document.createElement(tag), elemAttributes);
 }
@@ -374,5 +391,6 @@ ipcRenderer.on('oneQuestionData', (question, questionPath) => {
 elemQuestions.addEventListener('click', startQuestion);
 elemTeamsCards.addEventListener('click', onClickTeamCard);
 toStartButton.addEventListener('click', () => { ipcRenderer.send('to-start') });
-formAddButton.addEventListener('submit', addTeamCard);
+addCardButton.addEventListener('click', addTeamCard);
+themeSwapButton.addEventListener('click', swapColorTheme);
 window.addEventListener('resize', updateZoom);

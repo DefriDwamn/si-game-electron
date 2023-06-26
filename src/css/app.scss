@@ -1,11 +1,13 @@
-$back-color: #F1E0C5;
-$wrapper-color: #C9B79C;
-$inwrap-color: #71816dcc;
+$back-color: #3e484f;
+$wrapper-color: #465c64;
+$inwrap-color: #6d7d81cc;
 $button-color: #373f5171;
 $card-color: #373f5171;
 $text-color: #ffffffe1;
 
 $box-color: #212024;
+
+$defaultButton: #b9c1c4;
 
 html {
     width: 100%;
@@ -17,7 +19,6 @@ body {
     font-family: 'Arial';
     width: 100%;
     display: table-cell;
-    cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
 html,
@@ -378,55 +379,49 @@ body {
     }
 }
 
-.add-card {
-    float: right;
+.sidebar {
     position: fixed;
-    bottom: 5px;
-    right: 5px;
-    border-radius: 50px;
-    height: 46px;
-    border: none;
-    background-color: $card-color;
-    opacity: 0;
-    font-weight: 600;
+    left: -61px;
+    top: 0;
+    height: 100%;
+    width: 80px;
+    background-color: rgba(128, 128, 128, 0.3);
+
+    transition: left 0.3s ease-in-out;
 
     &:hover {
-        opacity: 1;
-    }
-}
-
-.toStartButton {
-    position: fixed;
-    padding: 0;
-    top: 5px;
-    left: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 25px;
-    width: 30px;
-    border: none;
-    background: none;
-
-    span {
-        height: 30%;
-        width: 100%;
-        background-color: $card-color;
-        border-radius: 20px;
+        left: 0;
     }
 
-    opacity: 0;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    &:hover {
-        opacity: 1;
+        li {
+            display: flex;
+            width: 50px;
+            height: 100%;
+
+            button {
+                background: none;
+                width: 50px;
+                height: 50px;
+                border: none;
+            }
+        }
     }
 }
 
 .chooseButtons {
     visibility: hidden;
     display: flex;
+    position: fixed;
+    bottom: 30px;
     justify-content: center;
-    margin: 1% 0;
     height: 4%;
     width: 100%;
 

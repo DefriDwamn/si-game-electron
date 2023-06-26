@@ -4,5 +4,10 @@
   "MAX_QUESTION_COUNT": 10,
   "MAX_QUESTION_CHARACTERS": 1000,
   "MAX_ANSWER_CHARACTERS": 1000,
-  "MAX_QUESTION_COST": 9999
+  "MAX_QUESTION_COST": 9999,
+  "ColorThemes": [
+    [
+      
+    ]
+  ]
 }

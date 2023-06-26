@@ -8,14 +8,13 @@ body {
   font-family: "Arial";
   width: 100%;
   display: table-cell;
-  cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: #F1E0C5;
+  background: #3e484f;
 }
 
 * {
@@ -35,7 +34,7 @@ body {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  background: #C9B79C;
+  background: #465c64;
   box-shadow: 70px 54p0pxx 134px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
   overflow: hidden;
@@ -46,7 +45,7 @@ body {
   max-height: 65%;
   margin-left: 6%;
   margin-right: 6%;
-  background: rgba(113, 129, 109, 0.8);
+  background: rgba(109, 125, 129, 0.8);
   border-radius: 0px 0px 60px 60px;
 }
 .plate-up .questions {
@@ -339,51 +338,44 @@ body {
   margin: 0;
 }
 
-.add-card {
-  float: right;
+.sidebar {
   position: fixed;
-  bottom: 5px;
-  right: 5px;
-  border-radius: 50px;
-  height: 46px;
-  border: none;
-  background-color: rgba(55, 63, 81, 0.4431372549);
-  opacity: 0;
-  font-weight: 600;
+  left: -61px;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  background-color: rgba(128, 128, 128, 0.3);
+  transition: left 0.3s ease-in-out;
 }
-.add-card:hover {
-  opacity: 1;
+.sidebar:hover {
+  left: 0;
 }
-
-.toStartButton {
-  position: fixed;
+.sidebar ul {
+  list-style: none;
   padding: 0;
-  top: 5px;
-  left: 5px;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 25px;
-  width: 30px;
-  border: none;
+  align-items: center;
+}
+.sidebar ul li {
+  display: flex;
+  width: 50px;
+  height: 100%;
+}
+.sidebar ul li button {
   background: none;
-  opacity: 0;
-}
-.toStartButton span {
-  height: 30%;
-  width: 100%;
-  background-color: rgba(55, 63, 81, 0.4431372549);
-  border-radius: 20px;
-}
-.toStartButton:hover {
-  opacity: 1;
+  width: 50px;
+  height: 50px;
+  border: none;
 }
 
 .chooseButtons {
   visibility: hidden;
   display: flex;
+  position: fixed;
+  bottom: 30px;
   justify-content: center;
-  margin: 1% 0;
   height: 4%;
   width: 100%;
 }
