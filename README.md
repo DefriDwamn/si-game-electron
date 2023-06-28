@@ -1,3 +1,4 @@
+[![en](https://img.shields.io/badge/English_version-red.svg)](README.en.md)
 # Своя игра
 
 ![Скриншот приложения](screenshots/screen1.png)
