@@ -5,9 +5,30 @@
   "MAX_QUESTION_CHARACTERS": 1000,
   "MAX_ANSWER_CHARACTERS": 1000,
   "MAX_QUESTION_COST": 9999,
-  "ColorThemes": [
-    [
-      
+  "ColorThemes": {
+    "back-color": [
+      "#F1E0C5",
+      "#3e484f"
+    ],
+    "wrapper-color": [
+      "#C9B79C",
+      "#465c64"
+    ],
+    "inwrap-color": [
+      "#71816dcc",
+      "#6d7d81cc"
+    ],
+    "button-color": [
+      "#373f5171",
+      "#373f5171"
+    ],
+    "card-color": [
+      "#373f5171",
+      "#373f5171"
+    ],
+    "text-color": [
+      "#ffffffe1",
+      "#ffffffe1"
     ]
-  ]
+  }
 }

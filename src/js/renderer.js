@@ -1,3 +1,4 @@
+const root = document.querySelector(':root');
 const addCardButton = document.querySelector('.addCardButton');
 const toStartButton = document.querySelector('.toStartButton');
 const themeSwapButton = document.querySelector('.themeSwapButton');
@@ -19,6 +20,9 @@ const KeyNo = 'KeyN';
 const MAX_TEAMS = 5;
 const QUESTION_TIME = 5;
 
+
+let colorThemes = [];
+let colorThemeIndex = 0;
 let questionTimer;
 
 ipcRenderer.send('reload-app-page');
@@ -358,8 +362,17 @@ function playSound(file) {
     sound.play();
 }
 
+
 function swapColorTheme() {
-    
+    if (colorThemeIndex == colorThemes['back-color'].length-1) {
+        colorThemeIndex = 0;
+    } else { colorThemeIndex += 1 }
+    root.style.setProperty('--back-color', colorThemes['back-color'][colorThemeIndex]);
+    root.style.setProperty('--button-color', colorThemes['button-color'][colorThemeIndex]);
+    root.style.setProperty('--card-color', colorThemes['card-color'][colorThemeIndex]);
+    root.style.setProperty('--inwrap-color', colorThemes['inwrap-color'][colorThemeIndex]);
+    root.style.setProperty('--text-color', colorThemes['text-color'][colorThemeIndex]);
+    root.style.setProperty('--wrapper-color', colorThemes['wrapper-color'][colorThemeIndex]);
 }
 
 function createElem(tag, elemAttributes) {
@@ -380,6 +393,11 @@ function removeMultipleEventListener(element, events, handler) {
     })
 }
 
+ipcRenderer.on('colorThemes', (arrThemes) => {
+    colorThemes = arrThemes;
+});
+
+
 ipcRenderer.on('questionPack', (questionPack) => {
     addQuestionPack(questionPack);
 });
@@ -388,9 +406,9 @@ ipcRenderer.on('oneQuestionData', (question, questionPath) => {
     setOneQuestion(question, questionPath);
 });
 
+window.addEventListener('resize', updateZoom);
 elemQuestions.addEventListener('click', startQuestion);
 elemTeamsCards.addEventListener('click', onClickTeamCard);
 toStartButton.addEventListener('click', () => { ipcRenderer.send('to-start') });
 addCardButton.addEventListener('click', addTeamCard);
 themeSwapButton.addEventListener('click', swapColorTheme);
-window.addEventListener('resize', updateZoom);
