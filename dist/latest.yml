@@ -1,0 +1,8 @@
+version: 1.0.0
+files:
+  - url: SiGame-Setup-1.0.0.exe
+    sha512: vzkE+z7JqyoSHkbzUQNHCvzx37moQ5QwJUBwENr62bgO4jUumEUDxFJAn+Pm8D2HjwXf0hB1X4oHkWCDdWjE+g==
+    size: 65176478
+path: SiGame-Setup-1.0.0.exe
+sha512: vzkE+z7JqyoSHkbzUQNHCvzx37moQ5QwJUBwENr62bgO4jUumEUDxFJAn+Pm8D2HjwXf0hB1X4oHkWCDdWjE+g==
+releaseDate: '2023-06-28T20:00:08.938Z'
