@@ -46,12 +46,13 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on('file-selected', (e, filepath) => {
-  sendQuestionPack(filepath);
+ipcMain.on('file-selected', (e, questionPackFilepath) => {
+  startApp(questionPackFilepath);
 })
 
 ipcMain.on('reload-app-page', (e) => {
-  mainWindow.webContents.send('questionPack', questionsData)
+  mainWindow.webContents.send('questionPack', questionsData);
+  mainWindow.webContents.send('colorThemes', config.ColorThemes);
 })
 
 ipcMain.on('to-start', (e) => {
@@ -60,16 +61,18 @@ ipcMain.on('to-start', (e) => {
   mainWindow.loadFile(path.join(__dirname, './src/start.html'));
 })
 
-function sendQuestionPack(filepath) {
+function startApp(questionPackFilepath) {
   try {
-    questionsData = readQuestionPack(filepath);
-    questionPath = path.parse(filepath).dir;
-    mainWindow.webContents.send('mainQuestionPath', filepath)
-
+    prepareQuestionPack(questionPackFilepath);
     mainWindow.loadFile(path.join(__dirname, './src/app.html'));
   } catch (err) {
     mainWindow.webContents.send('file-error', err);
   }
+}
+
+function prepareQuestionPack(filepath) {
+  questionsData = readQuestionPack(filepath);
+  questionPath = path.parse(filepath).dir;
 }
 
 function readQuestionPack(filepath) {
