@@ -11,8 +11,10 @@
 Установить **[Node.js](https://nodejs.org/ru)**, после загрузить все зависимости через пакетный менеджер `npm install`.
 
 ## Запуск
+- Запустить уже созданную сборку установщика можно по пути `si-game-electron/dist/SiGame Setup 1.0.0.exe`.
+- Для создание сборки используйте `npm run build` или запустите electron приложение `npm run start`.
 
-Для создание сборки используйте `npm run build` или запустите electron приложение `npm run start`.
+Тестовый пакет с вопросами находится по пути `si-game-electron/testQuestionPack/quests.json`.
 
 ## Управление
 
