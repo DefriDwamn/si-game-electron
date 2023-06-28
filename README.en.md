@@ -8,7 +8,7 @@
 
 **SiGame** is an interactive application based on the idea of a popular game that allows users to launch question packs and answer them, with a limit of up to 5 teams. Players earn points for each correct answer, while points are deducted for incorrect answers. The application is designed to be used offline and is recommended to be used with a projector. However, to conduct the game, you will need a host who will facilitate the game. The application accepts question packs in JSON format.
 
-## Dependencies
+## Dependencies (Development Only)
 
 Install **[Node.js](https://nodejs.org)**, and then download all dependencies using the package manager `npm install`.
 
