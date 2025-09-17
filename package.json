@@ -7,7 +7,11 @@
   "scripts": {
     "start": "electron .",
     "build-css": "sass src/css/app.scss src/css/app.css && sass src/css/start.scss src/css/start.css",
-    "build": "npm run build-css && electron-builder --win"
+    "build": "npm run build-css && electron-builder",
+    "build-win": "npm run build-css && electron-builder --win",
+    "build-linux": "npm run build-css && electron-builder --linux",
+    "build-mac": "npm run build-css && electron-builder --mac",
+    "build-all": "npm run build-css && electron-builder --win --linux --mac"
   },
   "author": {
     "name": "DefriDwamn",
@@ -33,6 +37,21 @@
     ],
     "win": {
       "target": "nsis"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "category": "Game"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.games"
     }
   }
 }
