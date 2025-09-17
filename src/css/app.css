@@ -27,10 +27,7 @@ body {
 }
 
 * {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   cursor: url(svg/cursor.svg) 16 16, auto;
 }
 
@@ -85,10 +82,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-margin-before: 0;
-          margin-block-start: 0;
-  -webkit-margin-after: 0;
-          margin-block-end: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
   color: var(--text-color);
   font-size: 110%;
   word-break: break-word;
@@ -106,10 +101,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-margin-before: 0;
-          margin-block-start: 0;
-  -webkit-margin-after: 0;
-          margin-block-end: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
   color: var(--text-color);
   font-size: 165%;
 }
@@ -160,16 +153,7 @@ body {
   height: 100%;
   background: #7a0d2e;
   border-radius: 100px;
-  -webkit-animation: question-bar-animation var(--barSec) linear infinite;
-          animation: question-bar-animation var(--barSec) linear infinite;
-}
-@-webkit-keyframes question-bar-animation {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
-  }
+  animation: question-bar-animation var(--barSec) linear infinite;
 }
 @keyframes question-bar-animation {
   0% {
@@ -403,4 +387,6 @@ body {
   width: 100px;
   height: 30px;
   background: #AA4848;
-}/*# sourceMappingURL=app.css.map */
+}
+
+/*# sourceMappingURL=app.css.map */

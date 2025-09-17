@@ -7,10 +7,7 @@ body {
 }
 
 * {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -70,7 +67,7 @@ body {
   cursor: url(svg/cursor.svg) 16 16, auto;
 }
 .container label:hover {
-  background-color: #ff8000;
+  background-color: rgb(255, 127.5, 0);
 }
 
 .circle {
@@ -79,8 +76,7 @@ body {
   height: 50px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
-  -webkit-animation: circle 2s ease-in-out infinite;
-          animation: circle 2s ease-in-out infinite;
+  animation: circle 2s ease-in-out infinite;
 }
 
 .circle:nth-child(2) {
@@ -91,21 +87,6 @@ body {
 .circle:nth-child(3) {
   top: 200px;
   left: 200px;
-}
-
-@-webkit-keyframes circle {
-  0% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 0.2;
-    transform: translate(-50%, -50%) scale(1.5);
-  }
-  100% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1);
-  }
 }
 
 @keyframes circle {
@@ -121,4 +102,6 @@ body {
     opacity: 0.5;
     transform: translate(-50%, -50%) scale(1);
   }
-}/*# sourceMappingURL=start.css.map */
+}
+
+/*# sourceMappingURL=start.css.map */

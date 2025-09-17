@@ -6,7 +6,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win"
+    "build-css": "sass src/css/app.scss src/css/app.css && sass src/css/start.scss src/css/start.css",
+    "build": "npm run build-css && electron-builder --win"
   },
   "author": {
     "name": "DefriDwamn",
@@ -15,7 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^22.3.5",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^23.6.0",
+    "sass": "^1.92.1"
   },
   "build": {
     "asar": true,
@@ -29,13 +31,8 @@
       "!src/css/start.scss",
       "!src/css/app.scss"
     ],
-    "icon": "D:/PICs/2-23.png",
     "win": {
-      "target": "nsis",
-      "icon": "D:/PICs/2-23.png"
+      "target": "nsis"
     }
-  },
-  "dependencies": {
-    "node-sass": "^4.14.1"
   }
 }
