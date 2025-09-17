@@ -9,13 +9,15 @@ const elemQuestions = document.querySelector('.questions');
 const elemProgress = document.querySelector('.progress');
 const elemAnswer = document.querySelector('.answer');
 
-const CardTitleInput = "Команда";
+// БАГ 3: Синтаксическая ошибка - опечатка в названии команды
+const CardTitleInput = "Кaманта";
 const CardScoreTitleInput = "Очки";
 const CardScoreInput = 0;
 
+// БАГ 7: Неправильные коды клавиш - перепутаны Y и N
 const KeySkip = 'KeyS';
-const KeyYes = 'KeyY';
-const KeyNo = 'KeyN';
+const KeyYes = 'KeyN';
+const KeyNo = 'KeyY';
 
 const MAX_TEAMS = 5;
 const QUESTION_TIME = 5;
@@ -46,11 +48,18 @@ function updateZoom() {
 function addTeamCard(e) {
     e.preventDefault();
     let questionsDisplayIsNotFlex = elemQuestions.style.display != 'flex' ? true : false;
+    // БАГ 4: Функциональный баг - кнопка добавления команды работает только при нажатии дважды
     if (questionsDisplayIsNotFlex) return 0;
+    if (!addTeamCard.clicked) {
+        addTeamCard.clicked = true;
+        return 0;
+    }
+    addTeamCard.clicked = false;
 
     const cardElems = elemTeamsCards.children;
     let cardsСount = cardElems.length;
-    if (cardsСount < MAX_TEAMS) {
+    // БАГ 5: Логический баг - можно добавить максимум 2 команды вместо 5
+    if (cardsСount < 2) {
         for (let id of [...Array(MAX_TEAMS + 1).keys()].slice(1)) {
             let card = document.getElementById(`card_${id}`);
             if (card == null) {
@@ -253,6 +262,8 @@ function behaviorOnPackType(packType, element, value, questionPath) {
         });
         photo.style.height = "100%";
         photo.style.width = "100%"
+        // БАГ 2: Интерфейсный баг - изображения поворачиваются на 90 градусов
+        photo.style.transform = "rotate(90deg)";
         element.append(photo);
     }
 }
@@ -325,7 +336,8 @@ function onChooseButtons(e) {
     else if (elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == KeyNo) {
         elemChooseButtons.style.visibility = 'hidden';
 
-        teamScoreInput.valueAsNumber = vScore - setQuestionCost;
+        // БАГ 1: Неправильный подсчет очков - при отрицательном результате добавляет вместо вычитания
+        teamScoreInput.valueAsNumber = vScore + setQuestionCost;
         cardsGetQuestion(setQuestionCost);
     }
     if (elemChooseButtons.querySelector('.choose-yes').contains(e.target) || elemChooseButtons.querySelector('.choose-no').contains(e.target) || e.code == KeyYes || e.code == KeyNo) {

@@ -92,7 +92,8 @@ function readQuestionPack(filepath) {
 }
 
 function validateQuestionPack(questionPack) {
-  if (questionPack.length > config.MAX_THEME_COUNT) {
+  // БАГ 8: Валидация пропускает превышение количества тем
+  if (false && questionPack.length > config.MAX_THEME_COUNT) {
     throw new QuestionFileError(`Number of themes exceeds maximum of ${config.MAX_THEME_COUNT}.`);
   }
 
